@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.xyz</groupId>
+        <artifactId>modularity</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>com.xyz</groupId>
+    <artifactId>internal-bundles-bom</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>internal bundles BOM</name>
+    <description>Build Of Material POM for internal bundles in this product.</description>
+
+    <modules>
+        <module>../internal-bundle-1</module>
+        <module>../internal-bundle-2</module>
+        <module>../internal-bundle-3</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.xyz</groupId>
+                <artifactId>external-bundles-bom</artifactId>
+                <version>1.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- due to cross-dependencies among internal bundles -->
+            <dependency>
+                <groupId>com.xyz</groupId>
+                <artifactId>internal-bundle-1</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xyz</groupId>
+                <artifactId>internal-bundle-2</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xyz</groupId>
+                <artifactId>internal-bundle-3</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

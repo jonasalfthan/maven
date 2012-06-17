@@ -1,0 +1,1 @@
+c:\Users\tibor17\IdeaProjects\apache-maven-2.2.1\bin\mvn install
