@@ -28,9 +28,9 @@
                 <defaultGoal>deploy</defaultGoal>
             </build>
             <modules>
-                <module>product-bom</module>
-                <module>internal-bundles-bom</module>
                 <module>external-bundles-bom</module>
+                <module>internal-bundles-bom</module>
+                <module>product-bom</module>
             </modules>
             <distributionManagement>
                 <repository>
@@ -45,9 +45,9 @@
                 <defaultGoal>deploy</defaultGoal>
             </build>
             <modules>
-                <module>product-bom</module>
-                <module>internal-bundles-bom</module>
                 <module>external-bundles-bom</module>
+                <module>internal-bundles-bom</module>
+                <module>product-bom</module>
             </modules>
             <distributionManagement>
                 <repository>
