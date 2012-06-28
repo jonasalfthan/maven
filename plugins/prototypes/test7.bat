@@ -1,0 +1,1 @@
+java -classpath "lib/js-1.7R1.jar;lib/." org.mozilla.javascript.tools.jsc.Main -d lib  -extends AbstractFunction1 test7.js
