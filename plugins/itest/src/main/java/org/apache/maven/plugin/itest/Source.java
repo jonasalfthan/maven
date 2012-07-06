@@ -12,19 +12,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.apache.maven.plugin.itest;
 
-/**
- * The purpose of this test is to test a functionality of
- * {@link IsRegex} matcher and to explain the use.
- * <p/>
- *
- * @author tibor17
- * @version ${VERSION}
- * @see IsRegex
- * @since ${VERSION}, 22.6.2012, 19:41
- */
-public class Main {
-    public static void main(String[] args) {
-        ;
+public class Source {
+    String importClasses[] = new String[0];
+    String importPackages[] = new String[0];
+    String extendClass;
+    String implementInterfaces[] = new String[0];
+    String securityManager;
+    String file;
+    int startScriptByLine;
+    boolean skip;
+
+    public Source() {}
+
+    public Source(String file) {
+        this.file = file;
     }
 }

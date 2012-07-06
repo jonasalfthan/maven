@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <description></description>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-itest-plugin</artifactId>
+  <version>1.0-alpha-01</version>
+  <goalPrefix>itest</goalPrefix>
+  <isolatedRealm>false</isolatedRealm>
+  <inheritedByDefault>true</inheritedByDefault>
+  <mojos>
+    <mojo>
+      <goal>jscript</goal>
+      <description></description>
+      <requiresDirectInvocation>false</requiresDirectInvocation>
+      <requiresProject>true</requiresProject>
+      <requiresReports>false</requiresReports>
+      <aggregator>false</aggregator>
+      <requiresOnline>false</requiresOnline>
+      <inheritedByDefault>true</inheritedByDefault>
+      <phase>compile</phase>
+      <implementation>org.apache.maven.plugin.itest.JScriptMojo</implementation>
+      <language>java</language>
+      <instantiationStrategy>per-lookup</instantiationStrategy>
+      <executionStrategy>once-per-session</executionStrategy>
+      <parameters>
+        <parameter>
+          <name>asynchronous</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>As of plugin version 1.0-alpha-01, sets whether the plugin runs in asynchronous mode.
+This is applicable in an interactive mode using console.</description>
+        </parameter>
+        <parameter>
+          <name>constants</name>
+          <type>java.util.Properties</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>JavaScript constants valid loaded in prior of starting scripts.
+Accessible in all non-skipped source scripts.</description>
+        </parameter>
+        <parameter>
+          <name>debug</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>As of plugin version 1.0-alpha-01, sets whether the plugin runs in debug mode.</description>
+        </parameter>
+        <parameter>
+          <name>errorPrintStream</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>InputStream accepted only if ${jscript.useRhinoGlobalProperties} is set to true.</description>
+        </parameter>
+        <parameter>
+          <name>inputStream</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>InputStream accepted only if ${jscript.useRhinoGlobalProperties} is set to true.</description>
+        </parameter>
+        <parameter>
+          <name>outputContextDirectory</name>
+          <type>java.io.File</type>
+          <required>true</required>
+          <editable>false</editable>
+          <description>The directory where compiled application classes are placed.</description>
+        </parameter>
+        <parameter>
+          <name>outputPrintStream</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>OutputStream accepted only if ${jscript.useRhinoGlobalProperties} is set to true.</description>
+        </parameter>
+        <parameter>
+          <name>projectArtifact</name>
+          <type>org.apache.maven.artifact.Artifact</type>
+          <required>true</required>
+          <editable>false</editable>
+          <description></description>
+        </parameter>
+        <parameter>
+          <name>securityManager</name>
+          <type>java.lang.String</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Security manager for I/O operations: java.lang.SecurityManager#checkWrite(java.lang.String)
+and java.lang.SecurityManager#checkRead(java.lang.String),
+ClassLoader (SecurityManager#checkCreateClassLoader) and permissions
+RuntimePermission(&quot;getClassLoader&quot;),
+Thread permissions RuntimePermission(&quot;modifyThread&quot;),
+SecurityManager#checkPackageAccess and SecurityManager#checkMemberAccess for fields.</description>
+        </parameter>
+        <parameter>
+          <name>skip</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>Disables the plugin execution.</description>
+        </parameter>
+        <parameter>
+          <name>sourceDirectory</name>
+          <type>java.io.File</type>
+          <required>true</required>
+          <editable>false</editable>
+          <description>This element specifies a relative path to
+&amp;lt;code&amp;gt;${project.build.scriptSourceDirectory}&amp;lt;/code&amp;gt
+containing the JavaScript sources.</description>
+        </parameter>
+        <parameter>
+          <name>sources</name>
+          <alias>sources</alias>
+          <type>org.apache.maven.plugin.itest.Source[]</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>A set of file patterns to include in the zip.</description>
+        </parameter>
+        <parameter>
+          <name>useConsole</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>As of plugin version 1.0-alpha-01, sets whether the plugin uses a console in an interactive mode.</description>
+        </parameter>
+        <parameter>
+          <name>verbose</name>
+          <type>boolean</type>
+          <required>false</required>
+          <editable>true</editable>
+          <description>As of plugin version 1.0-alpha-01, sets whether the plugin uses a verbose mode.
+The script is printed.</description>
+        </parameter>
+      </parameters>
+      <configuration>
+        <securityManager implementation="java.lang.String" default-value="${java.lang.SecurityManager}">${jscript.securityManager}</securityManager>
+        <inputStream implementation="java.lang.String" default-value="java.lang.System.in">${jscript.inputStream}</inputStream>
+        <verbose implementation="boolean" default-value="false">${jscript.useConsole}</verbose>
+        <useConsole implementation="boolean" default-value="false">${jscript.useConsole}</useConsole>
+        <asynchronous implementation="boolean" default-value="true">${jscript.asynchronous}</asynchronous>
+        <outputContextDirectory implementation="java.io.File" default-value="${project.build.directory}/script-classes"/>
+        <debug implementation="boolean" default-value="false">${jscript.debug}</debug>
+        <sourceDirectory implementation="java.io.File" default-value="${project.build.scriptSourceDirectory}">${jscript.sourceDirectory}</sourceDirectory>
+        <skip implementation="boolean" default-value="false">${jscript.skip}</skip>
+        <outputPrintStream implementation="java.lang.String">${jscript.outputPrintStream}</outputPrintStream>
+        <projectArtifact implementation="org.apache.maven.artifact.Artifact">${project.artifact}</projectArtifact>
+        <errorPrintStream implementation="java.lang.String" default-value="java.lang.System.err">${jscript.errorPrintStream}</errorPrintStream>
+      </configuration>
+    </mojo>
+  </mojos>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven.plugin-testing</groupId>
+      <artifactId>maven-plugin-testing-harness</artifactId>
+      <type>jar</type>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-project</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-profile</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-model</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <type>jar</type>
+      <version>1.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-container-default</artifactId>
+      <type>jar</type>
+      <version>1.0-alpha-8</version>
+    </dependency>
+    <dependency>
+      <groupId>classworlds</groupId>
+      <artifactId>classworlds</artifactId>
+      <type>jar</type>
+      <version>1.1-alpha-2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-artifact-manager</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-repository-metadata</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-artifact</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-provider-api</artifactId>
+      <type>jar</type>
+      <version>1.0-alpha-5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-core</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-settings</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-file</artifactId>
+      <type>jar</type>
+      <version>1.0-alpha-5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-parameter-documenter</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-http-lightweight</artifactId>
+      <type>jar</type>
+      <version>1.0-alpha-5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.reporting</groupId>
+      <artifactId>maven-reporting-api</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>doxia</groupId>
+      <artifactId>doxia-sink-api</artifactId>
+      <type>jar</type>
+      <version>1.0-alpha-4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-error-diagnostics</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-registry</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <type>jar</type>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-descriptor</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-interactivity-api</artifactId>
+      <type>jar</type>
+      <version>1.0-alpha-4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-monitor</artifactId>
+      <type>jar</type>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-ssh</artifactId>
+      <type>jar</type>
+      <version>1.0-alpha-5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <type>jar</type>
+      <version>0.1.23</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-archiver</artifactId>
+      <type>jar</type>
+      <version>1.0-alpha-7</version>
+    </dependency>
+    <dependency>
+      <groupId>rhino</groupId>
+      <artifactId>js</artifactId>
+      <type>jar</type>
+      <version>1.7R1</version>
+    </dependency>
+  </dependencies>
+</plugin>

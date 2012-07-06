@@ -75,7 +75,53 @@
     <favorites_list name="prototypes" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="SharingContext.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SharingContext.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="21" selection-start="2376" selection-end="2376" vertical-scroll-proportion="0.7411765">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sharingContext3.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sharingContext3.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="100" selection-start="8" selection-end="8" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sharingContext4.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sharingContext4.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="91" selection-start="8" selection-end="8" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sharingContext1.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sharingContext1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="35" selection-start="62" selection-end="62" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sharingContext2.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sharingContext2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -85,20 +131,27 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/RunnerCompiler.java" />
-        <option value="$PROJECT_DIR$/src/RunnerMozillaCompiler.java" />
-        <option value="$PROJECT_DIR$/src/RunnerMozillaCompilerExtendsObject.java" />
-        <option value="$PROJECT_DIR$/src/RunnerMozillaExtendsCustom1.java" />
-        <option value="$PROJECT_DIR$/src/RunnerMozillaExtendsCustom2.java" />
-        <option value="$PROJECT_DIR$/src/RunnerMozillaImplementsMarker.java" />
-        <option value="$PROJECT_DIR$/src/RunnerMozillaExtendsMissingFunction.java" />
-        <option value="$PROJECT_DIR$/src/RunnerMozillaExtendsMissingFunctionDouble.java" />
         <option value="$PROJECT_DIR$/src/RunnerMozillaExtendsMissingFunctionInteger.java" />
         <option value="$PROJECT_DIR$/src/RunnerMozillaExtendsMissingFunctionString.java" />
         <option value="$PROJECT_DIR$/src/RunnerMozillaExtendsMissingFunctionObject.java" />
         <option value="$PROJECT_DIR$/src/RunnerMozillaExtendsFunctionOverride.java" />
+        <option value="$PROJECT_DIR$/src/RunnerMozillaCompiler.java" />
+        <option value="$PROJECT_DIR$/sharingContext.js" />
+        <option value="$PROJECT_DIR$/sharingContext.bat" />
+        <option value="$PROJECT_DIR$/sharingContext1.bat" />
+        <option value="$PROJECT_DIR$/sharingContext2.bat" />
+        <option value="$PROJECT_DIR$/sharingContext2.js" />
+        <option value="$PROJECT_DIR$/sharingContext3.js" />
+        <option value="$PROJECT_DIR$/sharingContext3.bat" />
+        <option value="$PROJECT_DIR$/sharingContext4.js" />
+        <option value="$PROJECT_DIR$/sharingContext4.bat" />
+        <option value="$PROJECT_DIR$/sharingContext1.js" />
+        <option value="$PROJECT_DIR$/src/SharingContext.java" />
       </list>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
   </component>
   <component name="MavenRunner">
     <option name="jreName" value="#JAVA_INTERNAL" />
@@ -133,8 +186,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Favorites" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -153,28 +207,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prototypes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prototypes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="recentsLimit" value="5" />
@@ -188,47 +228,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="Downloaded.Files.Path" value="C:\Users\tibor17\IdeaProjects\repositories\maven\plugins\prototypes\lib" />
   </component>
-  <component name="RunManager" selected="Application.RunnerMozillaExtendsFunctionOverride">
-    <configuration default="false" name="RunnerMozillaExtendsMissingFunctionDouble" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" />
-      <option name="MAIN_CLASS_NAME" value="RunnerMozillaExtendsMissingFunctionDouble" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="prototypes" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="RunnerMozillaExtendsMissingFunctionObject" type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" />
-      <option name="MAIN_CLASS_NAME" value="RunnerMozillaExtendsMissingFunctionObject" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="prototypes" />
-      <envs />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="55570" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Application.SharingContext">
     <configuration default="false" name="RunnerMozillaExtendsMissingFunctionString" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" />
       <option name="MAIN_CLASS_NAME" value="RunnerMozillaExtendsMissingFunctionString" />
@@ -289,6 +289,46 @@
       <module name="prototypes" />
       <envs />
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="RunnerMozillaCompiler" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" />
+      <option name="MAIN_CLASS_NAME" value="RunnerMozillaCompiler" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="prototypes" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SharingContext" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" />
+      <option name="MAIN_CLASS_NAME" value="SharingContext" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="prototypes" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="49588" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -401,11 +441,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.RunnerMozillaExtendsMissingFunction" />
-      <item index="1" class="java.lang.String" itemvalue="Application.RunnerMozillaExtendsMissingFunctionObject" />
-      <item index="2" class="java.lang.String" itemvalue="Application.RunnerMozillaExtendsMissingFunctionString" />
-      <item index="3" class="java.lang.String" itemvalue="Application.RunnerMozillaExtendsMissingFunctionInteger" />
-      <item index="4" class="java.lang.String" itemvalue="Application.RunnerMozillaExtendsFunctionOverride" />
+      <item index="0" class="java.lang.String" itemvalue="Application.RunnerMozillaExtendsMissingFunctionString" />
+      <item index="1" class="java.lang.String" itemvalue="Application.RunnerMozillaExtendsMissingFunctionInteger" />
+      <item index="2" class="java.lang.String" itemvalue="Application.RunnerMozillaExtendsFunctionOverride" />
+      <item index="3" class="java.lang.String" itemvalue="Application.RunnerMozillaCompiler" />
+      <item index="4" class="java.lang.String" itemvalue="Application.SharingContext" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -438,24 +478,24 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.57371795" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32852563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.67147434" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.48076922" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5192308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -496,106 +536,84 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/js-1.7R1.jar!/org/mozilla/javascript/Script.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="8" selection-start="122" selection-end="144" vertical-scroll-proportion="-1.36" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/RunnerMozillaCompiler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="33" selection-start="81" selection-end="81" vertical-scroll-proportion="0.0" />
+        <state line="8" column="12" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RunnerMozillaCompilerExtendsObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="45" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0" />
+        <state line="0" column="13" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RunnerMozillaExtendsCustom1.java">
+    <entry file="jar://$PROJECT_DIR$/lib/js-1.7R1.jar!/org/mozilla/javascript/Script.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0" />
+        <state line="5" column="17" selection-start="164" selection-end="164" vertical-scroll-proportion="0.123636365" />
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0/src.zip!/java/util/RandomAccess.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0/src.zip!/java/lang/SecurityManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="29" selection-start="2972" selection-end="2984" vertical-scroll-proportion="0.7634783">
-          <folding />
-        </state>
+        <state line="292" column="11" selection-start="12221" selection-end="12221" vertical-scroll-proportion="0.33277312" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RunnerMozillaExtendsCustom2.java">
+    <entry file="jar://$PROJECT_DIR$/lib/js-1.7R1.jar!/org/mozilla/javascript/ImporterTopLevel.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="44" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="44" column="64" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RunnerMozillaImplementsMarker.java">
+    <entry file="jar://$PROJECT_DIR$/lib/js-1.7R1.jar!/org/mozilla/javascript/NativeJavaPackage.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5" column="13" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/AbstractSuperRhino.class">
+    <entry file="jar://$PROJECT_DIR$/lib/js-1.7R1.jar!/org/mozilla/javascript/Scriptable.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="40" selection-start="136" selection-end="154" vertical-scroll-proportion="0.09315068">
-          <folding />
-        </state>
+        <state line="30" column="48" selection-start="1050" selection-end="1052" vertical-scroll-proportion="0.8584559" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/AbstractFunction1.class">
+    <entry file="jar://$PROJECT_DIR$/lib/js-1.7R1.jar!/org/mozilla/javascript/Function.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="22" selection-start="136" selection-end="136" vertical-scroll-proportion="0.09315068">
-          <folding />
-        </state>
+        <state line="5" column="65" selection-start="212" selection-end="212" vertical-scroll-proportion="0.12208258" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/AbstractFunction2.class">
+    <entry file="file://$PROJECT_DIR$/lib/sharingContext41.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="22" selection-start="136" selection-end="136" vertical-scroll-proportion="0.09315068">
-          <folding />
-        </state>
+        <state line="3" column="68" selection-start="182" selection-end="182" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/AbstractFunction3.class">
+    <entry file="jar://$PROJECT_DIR$/lib/js-1.7R1.jar!/org/mozilla/javascript/NativeFunction.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="22" selection-start="136" selection-end="136" vertical-scroll-proportion="0.09855072">
-          <folding />
-        </state>
+        <state line="5" column="71" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RunnerMozillaExtendsMissingFunctionDouble.java">
+    <entry file="jar://$PROJECT_DIR$/lib/js-1.7R1.jar!/org/mozilla/javascript/BaseFunction.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="59" selection-start="57" selection-end="318" vertical-scroll-proportion="0.045945946">
-          <folding />
-        </state>
+        <state line="5" column="113" selection-start="260" selection-end="260" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RunnerMozillaExtendsFunctionOverride.java">
+    <entry file="file://$PROJECT_DIR$/sharingContext3.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="57" selection-start="346" selection-end="346" vertical-scroll-proportion="0.30512822">
-          <folding />
-        </state>
+        <state line="0" column="100" selection-start="8" selection-end="8" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RunnerMozillaExtendsMissingFunctionInteger.java">
+    <entry file="file://$PROJECT_DIR$/sharingContext4.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="55" selection-start="56" selection-end="56" vertical-scroll-proportion="0.043589745">
-          <folding />
-        </state>
+        <state line="0" column="91" selection-start="8" selection-end="8" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RunnerMozillaExtendsMissingFunctionObject.java">
+    <entry file="file://$PROJECT_DIR$/sharingContext2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="165" selection-end="165" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RunnerMozillaExtendsMissingFunctionString.java">
+    <entry file="file://$PROJECT_DIR$/sharingContext1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="107" selection-start="272" selection-end="272" vertical-scroll-proportion="0.21794872">
+        <state line="1" column="35" selection-start="62" selection-end="62" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SharingContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="21" selection-start="2376" selection-end="2376" vertical-scroll-proportion="0.7411765">
           <folding />
         </state>
       </provider>

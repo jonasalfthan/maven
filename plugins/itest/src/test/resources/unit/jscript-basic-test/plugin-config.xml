@@ -1,0 +1,32 @@
+<project>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-itest-plugin</artifactId>
+                <configuration>
+                    <debug>true</debug>
+                    <verbose>true</verbose>
+                    <useConsole>true</useConsole>
+                    <asynchronous>true</asynchronous>
+                    <useRhinoGlobalProperties>true</useRhinoGlobalProperties>
+                    <useConstants>true</useConstants>
+                    <sourceDirectory>${basedir}/src/test/scripts</sourceDirectory>
+                    <outputContextDirectory>${basedir}/target/script-classes</outputContextDirectory>
+                    <!--constants>
+                        <sourceDirectory>${project.build.scriptSourceDirectory}</sourceDirectory>
+                        <system>java.lang.System</system>
+                        <ten>java.math.BigInteger.TEN</ten>
+                    </constants-->
+                    <outputPrintStream>org.apache.maven.plugin.itest.PrintStreamAdapter</outputPrintStream>
+                    <sources>
+                        <source>
+                            <file>testConstants.js</file>
+                            <startScriptByLine>0</startScriptByLine>
+                        </source>
+                    </sources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
