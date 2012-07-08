@@ -6,7 +6,7 @@
 
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-itest-plugin</artifactId>
-    <version>1.0-alpha-01</version>
+    <version>1.0-alpha-03</version>
     <packaging>maven-plugin</packaging>
 
     <name>maven integration test mojo plugin</name>

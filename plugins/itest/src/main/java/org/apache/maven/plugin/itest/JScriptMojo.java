@@ -19,7 +19,6 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.logging.Log;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ImporterTopLevel;
 import org.mozilla.javascript.NativeJavaPackage;
@@ -32,10 +31,11 @@ import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.*;
 
 import static java.lang.Class.forName;
 import static java.lang.System.getSecurityManager;
@@ -45,16 +45,17 @@ import static java.lang.Thread.currentThread;
 import static java.util.Collections.emptyMap;
 import static java.util.concurrent.locks.LockSupport.park;
 import static java.util.concurrent.locks.LockSupport.unpark;
+import static org.apache.maven.plugin.itest.PrintStreamAdapter.Level.*;
 import static org.mozilla.javascript.Context.*;
 import static org.mozilla.javascript.ScriptableObject.putConstProperty;
-
-import static org.apache.maven.plugin.itest.PrintStreamAdapter.Level.*;
+import static org.mozilla.javascript.ScriptableObject.putProperty;
 
 /**
  * @goal jscript
  * @phase compile
  */
-public class JScriptMojo extends AbstractMojo {
+public final class JScriptMojo extends AbstractMojo {
+
     /**
      * As of plugin version 1.0-alpha-01, sets whether the plugin runs in debug mode.
      * @parameter expression="${jscript.debug}" default-value="false"
@@ -87,15 +88,37 @@ public class JScriptMojo extends AbstractMojo {
 
     volatile boolean useRhinoGlobalProperties;
 
+    /**
+     * As of plugin version 1.0-alpha-01, sets whether the plugin uses constants.
+     * @parameter expression="${jscript.useConstants}" default-value="true"
+     * @since 1.0-alpha-01
+     */
     boolean useConstants;
 
+    /**
+     * As of plugin version 1.0-alpha-01, sets whether the plugin uses properties.
+     * @parameter expression="${jscript.useProperties}" default-value="true"
+     * @since 1.0-alpha-02
+     */
+    boolean useProperties;
 
     /**
      * JavaScript constants valid loaded in prior of starting scripts.
      * Accessible in all non-skipped source scripts.
+     * The value of a property can be a string, a public class, and public static fields.
      * @parameter expression="${jscript.constants}"
+     * @since 1.0-alpha-02
      * */
     Properties constants;
+
+    /**
+     * JavaScript properties valid loaded in prior of starting scripts.
+     * Accessible in all non-skipped source scripts.
+     * The value of a property can be a string, a public class, and public static fields.
+     * @parameter expression="${jscript.properties}"
+     * @since 1.0-alpha-02
+     * */
+    Properties properties;
 
     //najskor premenne, komplikovane rozpoznavanie public tried, fieldov, a public static metod a ak ani to, tak sa snazi ziskat js funkciu
 
@@ -116,7 +139,7 @@ public class JScriptMojo extends AbstractMojo {
     boolean skip;
 
     /**
-     * The directory where compiled application classes are placed.
+     * The directory where compiled sources classes are placed.
      *
      * @parameter default-value="${project.build.directory}/script-classes"
      * @required
@@ -156,21 +179,21 @@ public class JScriptMojo extends AbstractMojo {
     String securityManager;
 
     /**
-     * InputStream accepted only if ${jscript.useRhinoGlobalProperties} is set to true.
+     * A public class which extends from InputStream with default constructor accepted only if ${jscript.useRhinoGlobalProperties} is set to true.
      * @parameter expression="${jscript.inputStream}" default-value="java.lang.System.in"
      * @since 1.0-alpha-01
      */
     String inputStream;
 
     /**
-     * OutputStream accepted only if ${jscript.useRhinoGlobalProperties} is set to true.
+     * A public class which extends from PrintStream with default constructor accepted only if ${jscript.useRhinoGlobalProperties} is set to true.
      * @parameter expression="${jscript.outputPrintStream}"
      * @since 1.0-alpha-01
      */
     String outputPrintStream;
 
     /**
-     * InputStream accepted only if ${jscript.useRhinoGlobalProperties} is set to true.
+     * A public class which extends from PrintStream with default constructor accepted only if ${jscript.useRhinoGlobalProperties} is set to true.
      * @parameter expression="${jscript.errorPrintStream}" default-value="java.lang.System.err"
      * @since 1.0-alpha-01
      */
@@ -178,14 +201,6 @@ public class JScriptMojo extends AbstractMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info(getClass().getSimpleName());
-        projectArtifact.setFile(outputContextDirectory);
-        try {
-            getLog().info(outputContextDirectory.getCanonicalPath().toString());
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        //Source source = sources[0];
-        getLog().info("Context#x: " + sourceDirectory);
 
         compile();
         loadAndRun();
@@ -218,8 +233,6 @@ public class JScriptMojo extends AbstractMojo {
         final PrintStream errorPrintStream = err = createPrintStream(this.errorPrintStream, new PrintStreamAdapter(getLog(), ERROR));
         final InputStream inputStream = createInputStream(this.inputStream, System.in);
 
-        System.out.println("outputPrintStream: " + outputPrintStream);
-
         final class ThrowableHolder { volatile Throwable throwable = null; }
         final ThrowableHolder throwableHolder = new ThrowableHolder();
         final Thread mavenThread = currentThread();
@@ -228,10 +241,13 @@ public class JScriptMojo extends AbstractMojo {
         if (newSecurityManager != null)
             setSecurityManager(newSecurityManager);
         final boolean isDebug = debug;
+        checkPropertiesAndConstants(useProperties ? properties : null, useConstants ? constants : null);
         useConstants &= constants != null;
         final Map constants
                 = useConstants ? new ConcurrentSkipListMap(this.constants) : emptyMap();
-        final Log logger = getLog();
+        useProperties &= properties != null;
+        final Map properties
+                = useProperties ? new ConcurrentSkipListMap(this.properties) : emptyMap();
         final ThreadsafeSource[] sources
                 = new ThreadsafeSource[this.sources == null ? 0 : this.sources.length];
         for (int i = 0; this.sources != null && i < this.sources.length; ++i)
@@ -251,6 +267,7 @@ public class JScriptMojo extends AbstractMojo {
                     } else scope = new ImporterTopLevel(ctx);
                     try {
                         injectConstants(constants, scope);
+                        injectProperties(properties, scope);
                         for (final ThreadsafeSource source : sources) {
                             importPackages(ctx, scope, source.importPackages);
                             importClasses(ctx, scope, source.importClasses);
@@ -258,6 +275,7 @@ public class JScriptMojo extends AbstractMojo {
                                 throw new MojoFailureException("null file in source");
                             evaluateReader(ctx, scope, source.file, source.startScriptByLine);
                         }
+                        Executors.newCachedThreadPool();//for console
                     } catch (MojoFailureException e) {
                         throwableHolder.throwable = e;
                     } catch (MojoExecutionException e) {
@@ -319,14 +337,21 @@ public class JScriptMojo extends AbstractMojo {
         }
     }
 
-    private static void injectConstants(Map properties, Scriptable scope) throws MojoExecutionException, MojoFailureException {
-        System.out.println("properties: " + properties);
+    private static void injectConstants(Map constants, Scriptable scope) throws MojoExecutionException, MojoFailureException {
+        for (Map.Entry entry : (Set<Map.Entry>) constants.entrySet()) {
+            String key = (String) entry.getKey();
+            Object value = resolvePropertyValue(entry.getValue());
+            if (value == null) continue;
+            putConstProperty(scope, key, javaToJS(value, scope));
+        }
+    }
+
+    private static void injectProperties(Map properties, Scriptable scope) throws MojoExecutionException, MojoFailureException {
         for (Map.Entry entry : (Set<Map.Entry>) properties.entrySet()) {
             String key = (String) entry.getKey();
             Object value = resolvePropertyValue(entry.getValue());
             if (value == null) continue;
-            System.out.println("value: " + value);
-            putConstProperty(scope, key, javaToJS(value, scope));
+            putProperty(scope, key, javaToJS(value, scope));
         }
     }
 
@@ -406,9 +431,7 @@ public class JScriptMojo extends AbstractMojo {
     private static PrintStream createPrintStream(String outputPrintStream, PrintStream fallback)
             throws MojoExecutionException, MojoFailureException {
         Object o = resolvePropertyValue(outputPrintStream);
-        System.out.println("o1: " + o);
         o = createInstance(o);
-        System.out.println("o2: " + o);
         return o instanceof PrintStream ? (PrintStream) o : fallback;
     }
 
@@ -432,20 +455,47 @@ public class JScriptMojo extends AbstractMojo {
         return sourceFile;
     }
 
-    private FileReader sourceJSFileReader(String pathname) throws MojoFailureException {
-        File sourceFile = sourceJSFile(pathname);
+    private FileReader sourceJSFileReader(File source) throws MojoFailureException {
         try {
-            return new FileReader(sourceFile);
+            return new FileReader(source);
         } catch (FileNotFoundException e) {
-            throw new MojoFailureException("source file " + sourceFile + " does not exist");
+            throw new MojoFailureException("source file " + source + " does not exist");
         }
     }
 
     private Object evaluateReader(Context ctx, ImporterTopLevel scope, String source, int startScriptByLine) throws MojoFailureException {
+        File sourceFile = sourceJSFile(source);
         try {
-            return ctx.evaluateReader(scope, sourceJSFileReader(source), source, startScriptByLine, null);
+            String scriptName = extractScriptFileNameWithoutExtension(sourceFile);
+            return ctx.evaluateReader(scope, sourceJSFileReader(sourceFile), scriptName, startScriptByLine, null);
         } catch (IOException e) {
             throw new MojoFailureException(e.getLocalizedMessage());
         }
+    }
+
+    private static String extractScriptFileNameWithoutExtension(File source) throws MojoFailureException {
+        String fileName = source.getName();
+        if (!fileName.toLowerCase().endsWith(".js"))
+            throw new MojoFailureException("source file " + source + " should nbe JavaScript *.js");
+        return fileName.substring(0, fileName.length() - 3);
+    }
+
+    private static void checkPropertiesAndConstants(Properties properties, Properties constants) throws MojoFailureException {
+        if (properties == null | constants == null) return;
+        HashSet p = new HashSet(properties.keySet());
+        if (p.retainAll(constants.keySet()))
+            throw new MojoFailureException("several properties overlap with constants: " + p);
+    }
+
+    private static Future executeAsynchronous(final ExecutorService executor, final ImporterTopLevel scope, final String command) {
+        return executor.submit(new Callable() {
+            public Object call() throws Exception {
+                try {
+                    return Context.enter().evaluateString(scope, command, "", 0, null);
+                } finally {
+                    Context.exit();
+                }
+            }
+        });
     }
 }

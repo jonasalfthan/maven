@@ -24,9 +24,23 @@ public class Source {
     int startScriptByLine;
     boolean skip;
 
-    public Source() {}
+    /**
+     * As of plugin version 1.0-alpha-03, sets class in order to compile from the JavaScript source.
+     * @parameter expression="${jscompiler.compileToClass}" default-value=""
+     * @since 1.0-alpha-03
+     * */
+    String compileToClass;
+
+    public Source() {
+        this(null);
+    }
 
     public Source(String file) {
+        this(file, null);
+    }
+
+    public Source(String file, String compileToClass) {
         this.file = file;
+        this.compileToClass = compileToClass;
     }
 }

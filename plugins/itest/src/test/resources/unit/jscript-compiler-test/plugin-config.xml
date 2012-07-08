@@ -17,7 +17,7 @@
                     <outputPrintStream>org.apache.maven.plugin.itest.PrintStreamAdapter</outputPrintStream>
                     <sources>
                         <source>
-                            <file>testConstantsAndProperties.js</file>
+                            <file></file>
                             <startScriptByLine>0</startScriptByLine>
                         </source>
                     </sources>
