@@ -6,14 +6,24 @@
 	MVN_BIN=$(MVN_DIR)-$(MVN_BIN_EXT)
 	MVN_URL=$(MVN_BIN_URL)/$(MVN_BIN)
 	MVN_LOG=$(ROOT)/mvn.log
+	MVN_ARGS=	#--log-file $(MVN_LOG)
 	M2_HOME=$(ROOT)/build/maven/$(MVN_DIR)
 	M2=$(M2_HOME)/bin
 	#export PATH=$M2:$PATH
 	export MAVEN_OPTS=-Xms16m -Xmx128m -Dfile.encoding=ISO-8859-1
+
+#.PHONY: configure
 	
-all: configure release clean compile test install deploy
+# target: all - Default target.
+#git checkout KentBeck src/main/java/junit/runner/Version.java
+all: configure clean release deploy
+
+# target: help - Display callable targets.
+help:
+	egrep "^# target:" [Mm]akefile
+
+# target: configure - Configure build process.
 configure:
-	echo ${user}; \
 	if [ ! -d $(ROOT)/build/maven/$(MVN_DIR) ] ;then \
 		@cd $(ROOT)/build/maven; wget $(MVN_URL); \
 		cd $(ROOT)/build/maven; tar xvzf $(MVN_BIN); \
@@ -22,24 +32,39 @@ configure:
 		cd $(ROOT); \
 	fi; \
 	cd $(ROOT); touch $(MVN_LOG); \
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=./build/maven/.m2 --batch-mode --version; \
+	#echo -n "Enter branch name : "; read BRANCH;
+	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 --batch-mode --version $(MVN_ARGS); \
 	cd $(ROOT)
+	
+# target: clean - Cleanup target dir.
 clean:
 	cd $(ROOT); touch $(MVN_LOG); \
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=./build/maven/.m2 --batch-mode --errors clean; \ #--log-file $(MVN_LOG)
+	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 --batch-mode --errors $(MVN_ARGS) -f pom.xml clean; \
 	cd $(ROOT)
+
+# target: compile - Compiles (if necessary) without installing artifacts.
 compile:
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=./build/maven/.m2 -DskipTests=true --batch-mode --errors compile; \
+	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 -DskipTests=true --batch-mode --errors $(MVN_ARGS) -f pom.xml compile; \
 	cd $(ROOT)
+
+# target: test - Tests without compilation.
 test:
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=./build/maven/.m2 --batch-mode --errors test; \
+	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 --batch-mode --errors $(MVN_ARGS) -f pom.xml test; \
 	cd $(ROOT)
+
+# target: release - Prompts the user to modify *-SNAPSHOT version to a new release, and updates junit.runner.Version#id().
 release:
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=./build/maven/.m2 -DskipTests=true --errors release:update-versions; \
+	#git checkout KentBeck pom.xml
+	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 -DskipTests=true --errors $(MVN_ARGS) -f pom.xml release:update-versions; \
 	cd $(ROOT)
+	
+# target: install - Installs (and compiles if necessary) the artifacts to local repository.
 install:
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=./build/maven/.m2 -DskipTests=true --batch-mode --errors javadoc:javadoc javadoc:jar install; \
+	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 -DskipTests=true --batch-mode --errors $(MVN_ARGS) -f pom.xml install; \
 	cd $(ROOT)
+	
+# target: deploy - Deploys to remote repository Maven central and Sourceforge.
 deploy:
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=./build/maven/.m2 -DskipTests=true --errors -f pom.xml -s src/main/config/settings.xml gpg:sign-and-deploy-file; \
+	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 $(MVN_ARGS) --errors -f pom.xml -s src/main/config/settings.xml install; \# use deploy
+	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 -DskipTests=true $(MVN_ARGS) --errors -f pom.xml -s src/main/config/settings.xml gpg:sign-and-deploy-file; \#
 	cd $(ROOT)
