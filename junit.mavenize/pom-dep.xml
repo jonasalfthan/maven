@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
+    <artifactId>junit-dep</artifactId>
     <version>4.x-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
@@ -51,9 +51,9 @@
     </prerequisites>
     <build>
         <resources>
-			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-			</resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
             <resource>
                 <directory>${project.basedir}</directory>
                 <includes>
@@ -138,10 +138,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-						<Bundle-SymbolicName>org.${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>org.${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>org.hamcrest.*;version="${hamcrestVersion}",junit.*;version="3.8.2",org.junit.*;version="${project.version}</Export-Package>
+                        <Export-Package><!--org.hamcrest.*;version="${hamcrestVersion}",-->junit.*;version="3.8.2",org.junit.*;version="${project.version}</Export-Package>
                         <Bundle-Description>${project.description}</Bundle-Description>
                         <Bundle-License>Common Public License Version 1.0</Bundle-License>
                         <Bundle-Vendor>${project.organization.name}</Bundle-Vendor>
@@ -159,31 +159,11 @@
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.3.2</version>
-				<!-- import release version without user's prompt if non-empty property value; otherwise prompt -->
+                <!-- import release version without user's prompt if non-empty property value; otherwise prompt -->
                 <configuration>
-                    <developmentVersion>${releaseVersion}</developmentVersion>
+                    <developmentVersion>${developmentVersion}</developmentVersion>
                 </configuration>
 			</plugin>
-			<plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2-beta-5</version>
-                <executions>
-                    <execution>
-                        <id>assembly-${project.artifactId}${project.version}.zip-for-sourceforge</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <finalName>${project.artifactId}${project.version}</finalName>
-                            <descriptors>
-                                <descriptor>src/main/assembly/src.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>2.2</version>
@@ -232,10 +212,6 @@
                             <minmemory>32m</minmemory>
                             <maxmemory>128m</maxmemory>
                             <failOnError>true</failOnError>
-							<includeDependencySources>true</includeDependencySources>
-                            <dependencySourceIncludes>
-                                <dependencySourceInclude>org.hamcrest:hamcrest-core:*</dependencySourceInclude>
-                            </dependencySourceIncludes>
 						</configuration>
                     </execution>
                 </executions>
@@ -251,7 +227,7 @@
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                     <files>${project.build.directory}/${project.build.finalName}-javadoc.jar,${project.build.directory}/${project.build.finalName}-sources.jar,${project.build.directory}/${project.build.finalName}-test-sources.jar</files>
                     <generatePom>false</generatePom>
-                    <pomFile>${project.basedir}/pom.xml</pomFile>
+                    <pomFile>${project.basedir}/pom-dep.xml</pomFile>
                     <packaging>jar</packaging>
                     <classifiers>javadoc,sources,test-sources</classifiers>
                     <types>jar,jar,jar</types>
@@ -262,18 +238,9 @@
     </build>
     <dependencies>
         <dependency>
-			<optional>true</optional>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
             <version>${hamcrestVersion}</version>
         </dependency>
     </dependencies>
-	<distributionManagement>
-        <downloadUrl>http://sourceforge.net/projects/junit/</downloadUrl>
-        <repository>
-            <id>sourceforge-staging</id>
-            <name>upload.to.sourceforge</name>
-            <url>ftp://upload.sourceforge.net/incoming</url>
-        </repository>
-    </distributionManagement>
 </project>

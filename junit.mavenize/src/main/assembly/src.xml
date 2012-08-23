@@ -6,6 +6,36 @@
         <format>zip</format>
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <directoryMode>755</directoryMode>
+            <useProjectAttachments>true</useProjectAttachments>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <unpack>true</unpack>
+            <includes>
+                <include>junit:junit:bundle:*</include>
+            </includes>
+            <unpackOptions>
+				<!--lineEnding>crlf</lineEnding-->
+                <includes>
+                    <include>META-INF/**/pom.properties</include>
+                    <include>META-INF/MANIFEST.MF</include>
+                </includes>
+            </unpackOptions>
+        </dependencySet>
+        <!--
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <directoryMode>755</directoryMode>
+            <useProjectAttachments>true</useProjectAttachments>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <includes>
+                <include>hamcrest:hamcrest-core:jar:*</include>
+            </includes>
+        </dependencySet>
+        -->
+    </dependencySets>
     <fileSets>
         <fileSet>
             <includes>
@@ -13,25 +43,63 @@
                 <include>cpl-v10.html</include>
                 <include>README.html</include>
                 <include>BUILDING</include>
+                <!--
                 <include>build.xml</include>
                 <include>pom.xml</include>
                 <include>pom-dep.xml</include>
+                -->
             </includes>
             <lineEnding>unix</lineEnding>
             <fileMode>0755</fileMode>
         </fileSet>
         <fileSet>
+            <directory>src/main/java</directory>
+            <outputDirectory>/</outputDirectory>
+            <lineEnding>unix</lineEnding>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>**/*.java</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>/</outputDirectory>
+            <lineEnding>keep</lineEnding>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/test/java</directory>
+            <outputDirectory>/</outputDirectory>
+            <lineEnding>unix</lineEnding>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>**/*.java</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/test/resources</directory>
+            <outputDirectory>/</outputDirectory>
+            <lineEnding>keep</lineEnding>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>target/apidocs</directory>
             <outputDirectory>javadoc</outputDirectory>
             <includes>
-                <include>*</include>
+                <include>**/*</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>doc</directory>
             <outputDirectory>doc</outputDirectory>
             <includes>
-                <include>*</include>
+                <include>**/*</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -51,13 +119,4 @@
             </excludes>
           </fileSet>
     </fileSets>
-    <!--
-    <dependencySets>
-        <dependencySet>
-            <includes>
-                <include>hamcrest:*</include>
-            </includes>
-        </dependencySet>
-    </dependencySets>
-    -->
 </assembly>

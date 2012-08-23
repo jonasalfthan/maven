@@ -1,12 +1,14 @@
 	SHELL = /bin/sh
+	RELEASE_VERSION=#release version without user's prompt if non-empty property value; otherwise prompt
+	MVN_LOG=$(ROOT)/mvn.log
+	MVN_ARGS=-Dmaven.repo.local=build/maven/.m2	--errors -DreleaseVersion=$(RELEASE_VERSION) -s src/main/config/settings.xml #--log-file $(MVN_LOG)
+	
 	ROOT=$(shell pwd)
 	MVN_DIR=apache-maven-3.0.4
 	MVN_BIN_URL=http://tux.rainside.sk/apache/maven/binaries
 	MVN_BIN_EXT=bin.tar.gz
 	MVN_BIN=$(MVN_DIR)-$(MVN_BIN_EXT)
 	MVN_URL=$(MVN_BIN_URL)/$(MVN_BIN)
-	MVN_LOG=$(ROOT)/mvn.log
-	MVN_ARGS=	#--log-file $(MVN_LOG)
 	M2_HOME=$(ROOT)/build/maven/$(MVN_DIR)
 	M2=$(M2_HOME)/bin
 	#export PATH=$M2:$PATH
@@ -16,6 +18,8 @@
 	
 # target: all - Default target.
 #git checkout KentBeck src/main/java/junit/runner/Version.java
+#git checkout KentBeck pom.xml
+#git checkout KentBeck pom-dep.xml
 all: configure clean release deploy
 
 # target: help - Display callable targets.
@@ -33,38 +37,41 @@ configure:
 	fi; \
 	cd $(ROOT); touch $(MVN_LOG); \
 	#echo -n "Enter branch name : "; read BRANCH;
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 --batch-mode --version $(MVN_ARGS); \
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) --version; \
 	cd $(ROOT)
 	
 # target: clean - Cleanup target dir.
 clean:
 	cd $(ROOT); touch $(MVN_LOG); \
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 --batch-mode --errors $(MVN_ARGS) -f pom.xml clean; \
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) -f pom.xml clean; \
 	cd $(ROOT)
 
 # target: compile - Compiles (if necessary) without installing artifacts.
 compile:
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 -DskipTests=true --batch-mode --errors $(MVN_ARGS) -f pom.xml compile; \
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) --batch-mode -f pom.xml compile; \
 	cd $(ROOT)
 
 # target: test - Tests without compilation.
 test:
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 --batch-mode --errors $(MVN_ARGS) -f pom.xml test; \
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) --batch-mode -f pom.xml test; \
 	cd $(ROOT)
 
 # target: release - Prompts the user to modify *-SNAPSHOT version to a new release, and updates junit.runner.Version#id().
 release:
 	#git checkout KentBeck pom.xml
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 -DskipTests=true --errors $(MVN_ARGS) -f pom.xml release:update-versions; \
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) -f pom.xml release:update-versions; \     # update junit:junit from SNAPSHOT version
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) -f pom-dep.xml release:update-versions; \ # update junit:junit-dep from SNAPSHOT version
 	cd $(ROOT)
 	
 # target: install - Installs (and compiles if necessary) the artifacts to local repository.
 install:
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 -DskipTests=true --batch-mode --errors $(MVN_ARGS) -f pom.xml install; \
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) -DskipTests=true --batch-mode -f pom.xml install; \
 	cd $(ROOT)
 	
-# target: deploy - Deploys to remote repository Maven central and Sourceforge.
+# target: deploy - Deploys artifacts junit:junit and junit:junit-dep to remote repository Maven central and Sourceforge ftp server.
 deploy:
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 $(MVN_ARGS) --errors -f pom.xml -s src/main/config/settings.xml install; \# use deploy
-	cd $(ROOT); exec $(M2)/mvn -Dmaven.repo.local=build/maven/.m2 -DskipTests=true $(MVN_ARGS) --errors -f pom.xml -s src/main/config/settings.xml gpg:sign-and-deploy-file; \#
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) -DskipTests=false -f pom-dep.xml install; \                  # junit:junit-dep not deploy to sourceforge
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) -DskipTests=true  -f pom.xml     deploy; \                   # only junit:junit to be deploy to sourceforge
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) -DskipTests=true  -f pom.xml     gpg:sign-and-deploy-file; \ # deploy junit:junit to Maven central
+	cd $(ROOT); exec $(M2)/mvn $(MVN_ARGS) -DskipTests=true  -f pom-dep.xml gpg:sign-and-deploy-file; \ # deploy junit:junit-dep to Maven central
 	cd $(ROOT)
