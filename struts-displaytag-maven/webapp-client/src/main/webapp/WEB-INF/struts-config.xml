@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+        "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+    <form-beans>
+        <form-bean name="UserForm" type="example.UserForm"/>
+        <form-bean name="LoginForm" type="example.LoginForm"/>
+        <form-bean name="LogoutForm" type="example.LogoutForm"/>
+        <form-bean name="MeterForm" type="example.MeterForm"/>
+    </form-beans>
+    <action-mappings>
+        <action input="/" name="LoginForm" path="/login" type="example.LoginAction" validate="false" scope="session">
+            <forward name="login" path="/login.jsp" redirect="true"/>
+            <forward name="success" path="/userAction.do" redirect="true"/>
+            <forward name="failed-login" path="/loginFailed.jsp" redirect="true"/>
+            <forward name="expired-login" path="/loginExpired.jsp" redirect="true"/>
+        </action>
+        <action input="/userAction" name="UserForm" path="/userAction" type="example.UserAction" validate="false" scope="session">
+            <forward name="success" path="/allMeters.jsp"/>
+            <forward name="selected" path="/meter.do"/>
+            <forward name="login" path="/login.jsp" redirect="true"/>
+            <forward name="expired-login" path="/loginExpired.jsp" redirect="true"/>
+        </action>
+        <action input="/logout" name="LogoutForm" path="/logout" type="example.LogoutAction" validate="false" scope="session">
+            <forward name="success" path="/login.jsp" redirect="true"/>
+            <forward name="expired-login" path="/loginExpired.jsp" redirect="true"/>
+        </action>
+        <action input="/meter" name="MeterForm" path="/meter" type="example.MeterAction" validate="false" scope="session">
+            <forward name="success" path="/meter.jsp"/>
+            <forward name="login" path="/login.jsp" redirect="true"/>
+            <forward name="expired-login" path="/loginExpired.jsp" redirect="true"/>
+        </action>
+    </action-mappings>
+    <message-resources parameter="example.AppResources"/>
+</struts-config>

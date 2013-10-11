@@ -1,0 +1,1 @@
+Copyright (c) ${YEAR} ICZ Slovakia a.s.. All Rights Reserved.

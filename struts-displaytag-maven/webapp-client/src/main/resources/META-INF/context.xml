@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <!-- Specify a JDBC datasource -->
+    <Resource name="h2database"
+              auth="Container"
+              type="javax.sql.DataSource"
+              username="sa"
+              password=""
+              driverClassName="org.h2.Driver"
+              url="jdbc:h2:./target/test"
+              maxActive="10" maxIdle="4"/>
+
+    <!-- Specify the security realm and location of the users file
+    <Realm className="org.apache.catalina.realm.MemoryRealm"
+           pathname="/tomcat/webapps/ROOT/WEB-INF/users.xml" />
+    -->
+</Context>
