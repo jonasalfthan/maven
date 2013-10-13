@@ -5,15 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>webapp-parent</artifactId>
         <groupId>com.icz.interview</groupId>
-        <version>1.0</version>
+        <artifactId>webapp-parent</artifactId>
+        <version>2.0</version>
     </parent>
 
     <artifactId>webapp-client</artifactId>
     <packaging>war</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>com.icz.interview</groupId>
+            <artifactId>webapp-service-layer</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts-core</artifactId>
@@ -59,17 +63,13 @@
             <artifactId>displaytag-portlet</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
-        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 
@@ -95,17 +95,6 @@
                 <configuration>
                     <failOnMissingWebXml>true</failOnMissingWebXml>
                     <containerConfigXML>src/main/resources/META-INF/context.xml</containerConfigXML>
-
-                    <!-- <webResources>
-                         <resource>
-                             <directory>src/conf</directory>skus vlozit persistence.xml do src/main/webapp/META-INF
-                             musi sa vo warku objavit v /WEB-INF/classes/META-INF
-                             <targetPath>META-INF</targetPath>
-                             <includes>
-                                 <include>persistence.xml</include>
-                             </includes>
-                         </resource>
-                     </webResources>-->
                 </configuration>
             </plugin>
             <plugin>

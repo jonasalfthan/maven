@@ -5,33 +5,44 @@
 
 <struts-config>
     <form-beans>
-        <form-bean name="UserForm" type="example.UserForm"/>
-        <form-bean name="LoginForm" type="example.LoginForm"/>
-        <form-bean name="LogoutForm" type="example.LogoutForm"/>
-        <form-bean name="MeterForm" type="example.MeterForm"/>
+        <form-bean name="ProjectsForm" type="com.icz.interview.webapp.client.ProjectsForm"/>
+        <form-bean name="LoginForm" type="com.icz.interview.webapp.client.LoginForm"/>
+        <form-bean name="LogoutForm" type="com.icz.interview.webapp.client.LogoutForm"/>
+        <form-bean name="ProjectForm" type="com.icz.interview.webapp.client.ProjectForm"/>
+        <form-bean name="NewProjectForm" type="com.icz.interview.webapp.client.NewProjectForm"/>
     </form-beans>
     <action-mappings>
-        <action input="/" name="LoginForm" path="/login" type="example.LoginAction" validate="false" scope="session">
+        <action input="/" name="LoginForm" path="/login" type="com.icz.interview.webapp.client.LoginAction" validate="false" scope="session">
             <forward name="login" path="/login.jsp" redirect="true"/>
-            <forward name="success" path="/userAction.do" redirect="true"/>
+            <forward name="success" path="/projects.do" redirect="true"/>
             <forward name="failed-login" path="/loginFailed.jsp" redirect="true"/>
             <forward name="expired-login" path="/loginExpired.jsp" redirect="true"/>
         </action>
-        <action input="/userAction" name="UserForm" path="/userAction" type="example.UserAction" validate="false" scope="session">
-            <forward name="success" path="/allMeters.jsp"/>
-            <forward name="selected" path="/meter.do"/>
+        <action input="/projects" name="ProjectsForm" path="/projects" type="com.icz.interview.webapp.client.ProjectsAction" validate="false" scope="session">
+            <forward name="success" path="/projects.jsp"/>
             <forward name="login" path="/login.jsp" redirect="true"/>
             <forward name="expired-login" path="/loginExpired.jsp" redirect="true"/>
+            <forward name="selected" path="/project.do"/>
+            <forward name="failure" path="/failedOperation.jsp"/>
         </action>
-        <action input="/logout" name="LogoutForm" path="/logout" type="example.LogoutAction" validate="false" scope="session">
+        <action input="/logout" name="LogoutForm" path="/logout" type="com.icz.interview.webapp.client.LogoutAction" validate="false" scope="session">
             <forward name="success" path="/login.jsp" redirect="true"/>
             <forward name="expired-login" path="/loginExpired.jsp" redirect="true"/>
         </action>
-        <action input="/meter" name="MeterForm" path="/meter" type="example.MeterAction" validate="false" scope="session">
-            <forward name="success" path="/meter.jsp"/>
+        <action input="/project" name="ProjectForm" path="/project" type="com.icz.interview.webapp.client.ProjectAction" validate="false" scope="session">
+            <forward name="success" path="/project.jsp"/>
             <forward name="login" path="/login.jsp" redirect="true"/>
             <forward name="expired-login" path="/loginExpired.jsp" redirect="true"/>
+            <forward name="projects" path="/projects.do"/>
+            <forward name="failure" path="/failedOperation.jsp"/>
+        </action>
+        <action input="/newProject" name="NewProjectForm" path="/newProject" type="com.icz.interview.webapp.client.NewProjectAction" validate="false" scope="session">
+            <forward name="success" path="/newProject.jsp"/>
+            <forward name="login" path="/login.do" redirect="true"/>
+            <forward name="expired-login" path="/loginExpired.jsp" redirect="true"/>
+            <forward name="projects" path="/projects.do"/>
+            <forward name="failure" path="/failedOperation.jsp"/>
         </action>
     </action-mappings>
-    <message-resources parameter="example.AppResources"/>
+    <message-resources parameter="com.icz.interview.webapp.client.AppResources"/>
 </struts-config>
